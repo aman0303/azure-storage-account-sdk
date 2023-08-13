@@ -1,0 +1,77 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\StorageAccountSDK\\Playground\\Playground.csproj": {}
+  },
+  "projects": {
+    "C:\\StorageAccountSDK\\Playground\\Playground.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\StorageAccountSDK\\Playground\\Playground.csproj",
+        "projectName": "Playground",
+        "projectPath": "C:\\StorageAccountSDK\\Playground\\Playground.csproj",
+        "packagesPath": "C:\\Users\\kumaraman\\.nuget\\packages\\",
+        "outputPath": "C:\\StorageAccountSDK\\Playground\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\kumaraman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Azure.Identity": {
+              "target": "Package",
+              "version": "[1.9.0, )"
+            },
+            "Azure.Storage.Blobs": {
+              "target": "Package",
+              "version": "[12.17.0, )"
+            },
+            "Azure.Storage.Blobs.Batch": {
+              "target": "Package",
+              "version": "[12.14.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
