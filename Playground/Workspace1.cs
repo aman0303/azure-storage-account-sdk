@@ -66,23 +66,36 @@ namespace Playground
             {
             });
             */
-            ThreadPool.SetMinThreads(1500, 4);
-            ServicePointManager.DefaultConnectionLimit = 1000;
-            /*using var blob1 = new MemoryStream()
-            {
-                Capacity = 60 * 1024 * 1024
-            };*/
+            /*ThreadPool.SetMinThreads(1500, 4);
+            ServicePointManager.DefaultConnectionLimit = 1000;*/
 
+            /*
+                        using var blob1 = new MemoryStream()
+                        {
+                            Capacity = 4 * 1024 * 1024
+                        };
 
+                        await blobClient.DownloadToAsync(blob1, transferOptions: new Azure.Storage.StorageTransferOptions()
+                        {
+                            MaximumConcurrency = 10,
+                            MaximumTransferSize = 4 * 1024 * 1024,
+                            InitialTransferSize = 4 * 1024 * 1024
+                        });
+            */
             /*
                         Console.WriteLine(Directory.GetCurrentDirectory().ToString());
                         var filePath = Path.Combine(Directory.GetCurrentDirectory(), "file.zip");
                         await blobClient.DownloadToAsync(filePath, default, transferOptions: new Azure.Storage.StorageTransferOptions()
                         {
-                            MaximumConcurrency = 8,
-                            MaximumTransferSize = 1 * 1024 * 1024
+                            MaximumConcurrency = 10,
+                            MaximumTransferSize = 4 * 1024 * 1024,
+                            InitialTransferSize = 4 * 1024 * 1024
                         });
             */
+
+
+
+            // await destBlobClient.UploadAsync();
 
             /*
             var blobServiceClient = new BlobServiceClient(blobEndpoint, new DefaultAzureCredential());
@@ -108,14 +121,14 @@ namespace Playground
             var temp = blobSasUriBuilder.ToUri();
             await destBlobClient.SyncCopyFromUriAsync(blobSasUriBuilder.ToUri());
             */
+            /*
+                        var token = await (new DefaultAzureCredential()).GetTokenAsync(new Azure.Core.TokenRequestContext(scopes: new string[] { "https://storage.azure.com/.default" }));
 
-            var token = await (new DefaultAzureCredential()).GetTokenAsync(new Azure.Core.TokenRequestContext(scopes: new string[] { "https://storage.azure.com/.default" }));
-
-            await destBlobClient.SyncCopyFromUriAsync(blobClient.Uri, options: new BlobCopyFromUriOptions()
-            {
-                SourceAuthentication = new Azure.HttpAuthorization("Bearer", token.Token)
-            });
-
+                        await destBlobClient.SyncCopyFromUriAsync(blobClient.Uri, options: new BlobCopyFromUriOptions()
+                        {
+                            SourceAuthentication = new Azure.HttpAuthorization("Bearer", token.Token)
+                        });
+            */
             /*await blobClient.DownloadToAsync(blob1, transferOptions: new Azure.Storage.StorageTransferOptions()
             {
                 MaximumConcurrency = 8,
@@ -127,6 +140,20 @@ namespace Playground
                 MaximumTransferSize = 50 * 1024 * 1024
             });*/
             // await destBlobClient.UploadAsync(blobStream, conditions: null);
+
+
+
+            var stream = await blobClient.OpenReadAsync(
+                bufferSize: 4 * 1024 * 1024, conditions: null);
+
+            await destBlobClient.UploadAsync(stream, transferOptions: new Azure.Storage.StorageTransferOptions()
+            {
+                MaximumConcurrency = 10,
+                MaximumTransferSize = 4 * 1024 * 1024,
+                InitialTransferSize = 4 * 1024 * 1024
+            },
+            conditions: null);
+
             Console.WriteLine(Stopwatch.GetElapsedTime(st));
             Console.ReadKey();
         }
